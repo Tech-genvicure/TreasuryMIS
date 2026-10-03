@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Treasury MIS - Spreadsheet</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><span>TM</span><div><strong>Treasury MIS</strong><small>Finance</small></div></div>
+    <nav>
+      <a href="/dashboard">Dashboard</a>
+      <a class="active" href="/spreadsheet">Spreadsheet</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="user-chip"><strong>{{ user.username }}</strong><small>{{ user.role }}</small></div>
+      <a href="/logout">Logout</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <div><p class="eyebrow">DATA MANAGEMENT</p><h1>Spreadsheet</h1></div>
+      <a class="primary button" href="/download/excel">Download Excel</a>
+    </header>
+
+    <div class="notice">
+      <strong>Database-backed spreadsheet.</strong>
+      Changes made here update the dashboard immediately. Excel is generated only when downloaded.
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-table="funds">Funds Position</button>
+      <button class="tab" data-table="payables">Payables</button>
+      <button class="tab" data-table="receivables">Receivables</button>
+      <button class="tab" data-table="borrowings">Borrowings</button>
+    </div>
+
+    <section class="panel table-panel">
+      <div class="panel-head">
+        <div><h2 id="table-title">Funds Position</h2><p id="table-help">Edit a row and save it, or add a new row.</p></div>
+        <button class="secondary" onclick="addRow()">+ Add Row</button>
+      </div>
+      <div class="table-wrap">
+        <table id="data-table"><thead></thead><tbody></tbody></table>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="/static/app.js"></script>
+<script>initSpreadsheet();</script>
+</body>
+</html>

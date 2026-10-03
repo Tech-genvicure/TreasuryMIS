@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Treasury MIS - Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><span>TM</span><div><strong>Treasury MIS</strong><small>Finance</small></div></div>
+    <nav>
+      <a class="active" href="/dashboard">Dashboard</a>
+      <a href="/spreadsheet">Spreadsheet</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="user-chip"><strong>{{ user.username }}</strong><small>{{ user.role }}</small></div>
+      <a href="/logout">Logout</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">TREASURY</p>
+        <h1>Daily Fund Position</h1>
+      </div>
+      <div class="reporting-date">Reporting Date: <strong>{{ reporting_date }}</strong></div>
+    </header>
+
+    <section class="kpi-grid">
+      <article class="kpi available"><span>Funds Available</span><strong id="funds">₹0</strong></article>
+      <article class="kpi payable"><span>Total Payables</span><strong id="payables">₹0</strong></article>
+      <article class="kpi receivable"><span>Total Receivables</span><strong id="receivables">₹0</strong></article>
+      <article class="kpi net"><span>Net Position</span><strong id="net">₹0</strong></article>
+    </section>
+
+    <section class="section-grid">
+      <article class="panel">
+        <div class="panel-head"><div><h2>Funds Position</h2><p>Available cash and investments</p></div></div>
+        <div id="funds-list" class="metric-list"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head"><div><h2>Borrowings</h2><p>Current financing position</p></div></div>
+        <div class="borrow-grid">
+          <div><span>Sanctioned</span><strong id="sanctioned">₹0</strong></div>
+          <div><span>Disbursed</span><strong id="disbursed">₹0</strong></div>
+          <div><span>Outstanding</span><strong id="outstanding">₹0</strong></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section-grid lower">
+      <article class="panel">
+        <div class="panel-head"><div><h2>Top Vendor Exposure</h2><p>Unpaid payables · ₹ Lakhs</p></div></div>
+        <div id="vendors" class="bar-list"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head"><div><h2>Cash Flow Outlook</h2><p>Unpaid amounts by timeline bucket</p></div></div>
+        <div id="cash-flow" class="cash-list"></div>
+      </article>
+    </section>
+  </main>
+</div>
+<script src="/static/app.js"></script>
+<script>loadDashboard();</script>
+</body>
+</html>
