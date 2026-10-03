@@ -5,3 +5,5 @@ __pycache__/
 backups/*
 logs/*
 *.zip
+
+Treasury_Master*.xlsx
