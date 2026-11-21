@@ -1,0 +1,733 @@
+
+@import "tailwindcss";
+
+/* =========================================================
+   GENVICURE TREASURY MIS
+   PRIVATE BANKING DESIGN SYSTEM
+   Theme: Full Light
+   ========================================================= */
+
+:root {
+  color-scheme: light;
+
+  /* Brand */
+  --brand-navy: #14263D;
+  --brand-navy-soft: #243A52;
+  --brand-gold: #C4A66A;
+  --brand-gold-light: #E8D9B8;
+
+  /* Backgrounds */
+  --background: #F6F4EF;
+  --surface: #FFFFFF;
+  --surface-secondary: #F1EFE9;
+  --surface-hover: #F8F7F3;
+
+  /* Typography */
+  --foreground: #172638;
+  --text-secondary: #526174;
+  --text-muted: #87909A;
+  --text-light: #A4ACB5;
+
+  /* Borders */
+  --border: #E8E5DE;
+  --border-strong: #DAD6CC;
+
+  /* Semantic */
+  --success: #237A62;
+  --success-bg: #EAF4EF;
+
+  --warning: #B8873B;
+  --warning-bg: #F8F1E5;
+
+  --danger: #B65B55;
+  --danger-bg: #F8ECEA;
+
+  --info: #537B9D;
+  --info-bg: #EDF2F7;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(20, 38, 61, 0.04);
+  --shadow-sm: 0 2px 8px rgba(20, 38, 61, 0.045);
+  --shadow-md: 0 8px 24px rgba(20, 38, 61, 0.07);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* Layout */
+  --sidebar-width: 248px;
+  --header-height: 72px;
+
+  /* Motion */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+
+  --background-color: var(--background);
+}
+
+/* =========================================================
+   RESET AND BASE
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-height: 100%;
+  background: var(--background);
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+
+  font-family:
+    "Inter",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  font-size: 14px;
+  line-height: 1.5;
+
+  font-feature-settings:
+    "cv02",
+    "cv03",
+    "cv04",
+    "cv11";
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Financial figures */
+
+.tabular-nums,
+.financial-value,
+.treasury-grid .ag-cell {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Selection */
+
+::selection {
+  color: var(--brand-navy);
+  background: rgba(196, 166, 106, 0.22);
+}
+
+/* Focus */
+
+:focus-visible {
+  outline: 2px solid var(--brand-gold);
+  outline-offset: 2px;
+}
+
+/* Links */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Buttons */
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================================
+   SCROLLBARS
+   ========================================================= */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #C9C5BB transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C9C5BB;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A9A397;
+}
+
+/* =========================================================
+   SHARED SURFACES
+   ========================================================= */
+
+.premium-surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+.premium-surface-hover {
+  transition:
+    border-color var(--transition-normal),
+    box-shadow var(--transition-normal),
+    transform var(--transition-normal);
+}
+
+.premium-surface-hover:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.premium-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+/* =========================================================
+   FINANCIAL TYPOGRAPHY
+   ========================================================= */
+
+.financial-value {
+  color: var(--brand-navy);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+}
+
+.financial-label {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 550;
+  letter-spacing: 0.015em;
+}
+
+.eyebrow {
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   STATUS INDICATORS
+   ========================================================= */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  min-height: 24px;
+  padding: 3px 9px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.status-success {
+  color: var(--success);
+  background: var(--success-bg);
+}
+
+.status-warning {
+  color: var(--warning);
+  background: var(--warning-bg);
+}
+
+.status-danger {
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.status-info {
+  color: var(--info);
+  background: var(--info-bg);
+}
+
+/* =========================================================
+   TREASURY SPREADSHEET
+   Preserve existing spreadsheet structure and behaviour.
+   ========================================================= */
+
+.treasury-spreadsheet {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  overflow: hidden;
+
+  color: var(--foreground);
+  background: var(--surface);
+
+  font-family:
+    "Inter",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.treasury-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  width: 100%;
+  min-height: 64px;
+
+  padding: 12px 20px;
+
+  flex-shrink: 0;
+
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.treasury-toolbar-left,
+.treasury-toolbar-right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.treasury-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  min-height: 36px;
+  padding: 0 15px;
+
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.treasury-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.treasury-button-primary {
+  color: #FFFFFF;
+  background: var(--brand-navy);
+  border-color: var(--brand-navy);
+}
+
+.treasury-button-primary:hover:not(:disabled) {
+  background: #203B59;
+  border-color: #203B59;
+  box-shadow: 0 2px 6px rgba(20, 38, 61, 0.12);
+}
+
+.treasury-button-secondary {
+  color: var(--brand-navy);
+  background: #FFFFFF;
+  border-color: var(--border-strong);
+}
+
+.treasury-button-secondary:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: #BEB8AA;
+}
+
+.treasury-button-delete {
+  color: var(--danger);
+  background: #FFFFFF;
+  border-color: #E9C7C3;
+}
+
+.treasury-button-delete:hover:not(:disabled) {
+  background: var(--danger-bg);
+  border-color: #DDA6A0;
+}
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.treasury-search {
+  width: 250px;
+  min-width: 150px;
+  height: 37px;
+
+  padding: 0 12px;
+
+  color: var(--foreground);
+  background: #FFFFFF;
+
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+
+  outline: none;
+
+  font-family: inherit;
+  font-size: 12px;
+
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.treasury-search::placeholder {
+  color: var(--text-light);
+}
+
+.treasury-search:focus {
+  border-color: var(--brand-gold);
+  box-shadow: 0 0 0 3px rgba(196, 166, 106, 0.14);
+}
+
+/* =========================================================
+   SHEET TABS
+   ========================================================= */
+
+.treasury-tabs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  width: 100%;
+  min-height: 48px;
+
+  padding: 0 18px;
+
+  flex-shrink: 0;
+
+  background: #FAF9F6;
+  border-bottom: 1px solid var(--border);
+}
+
+.treasury-tab {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 36px;
+  padding: 0 16px;
+
+  border: 0;
+  border-radius: 6px;
+
+  color: var(--text-secondary);
+  background: transparent;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 550;
+
+  cursor: pointer;
+
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.treasury-tab:hover {
+  color: var(--brand-navy);
+  background: #F0EEE8;
+}
+
+.treasury-tab-active {
+  color: var(--brand-navy);
+  background: #FFFFFF;
+  box-shadow: inset 0 0 0 1px var(--border);
+  font-weight: 650;
+}
+
+.treasury-tab-active::after {
+  position: absolute;
+  content: "";
+  bottom: -6px;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: var(--brand-gold);
+  border-radius: 2px;
+}
+
+/* =========================================================
+   AG GRID CONTAINER
+   ========================================================= */
+
+.treasury-grid {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  flex: 1;
+
+  color: var(--foreground);
+  background: #FFFFFF;
+
+  font-family:
+    "Inter",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  font-size: 12px;
+}
+
+/* Root */
+
+.treasury-grid .ag-root-wrapper {
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  border: 1px solid var(--border) !important;
+  border-radius: 0 !important;
+}
+
+/* =========================================================
+   AG GRID HEADER
+   ========================================================= */
+
+.treasury-grid .ag-header {
+  background: #F5F3EE !important;
+  border-bottom: 1px solid var(--border-strong) !important;
+}
+
+.treasury-grid .ag-header-row {
+  background: #F5F3EE !important;
+}
+
+.treasury-grid .ag-header-cell {
+  color: var(--brand-navy) !important;
+  background: #F5F3EE !important;
+
+  border-right: 1px solid #EAE7DF !important;
+
+  font-family: inherit !important;
+  font-size: 11px !important;
+  font-weight: 650 !important;
+  letter-spacing: 0.015em;
+}
+
+.treasury-grid .ag-header-cell-label,
+.treasury-grid .ag-header-cell-text {
+  color: var(--brand-navy) !important;
+  font-weight: 650 !important;
+}
+
+/* Header icons */
+
+.treasury-grid .ag-header-icon,
+.treasury-grid .ag-sort-indicator-icon {
+  color: var(--text-muted) !important;
+}
+
+/* =========================================================
+   AG GRID BODY
+   ========================================================= */
+
+.treasury-grid .ag-body,
+.treasury-grid .ag-center-cols-container {
+  background: #FFFFFF !important;
+}
+
+.treasury-grid .ag-row {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #F0EEE8 !important;
+}
+
+.treasury-grid .ag-row-odd,
+.treasury-grid .ag-row-even {
+  background: #FFFFFF !important;
+}
+
+/* Cells */
+
+.treasury-grid .ag-cell {
+  display: flex;
+  align-items: center;
+
+  color: #344255 !important;
+  background: transparent !important;
+
+  border-right: 1px solid #F2F0EB !important;
+
+  font-family: inherit !important;
+  font-size: 12px !important;
+  font-weight: 450;
+
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hover */
+
+.treasury-grid .ag-row-hover,
+.treasury-grid .ag-row-hover .ag-cell {
+  background: #FAF8F3 !important;
+}
+
+/* Selected */
+
+.treasury-grid .ag-row-selected,
+.treasury-grid .ag-row-selected .ag-cell {
+  background: #F4F0E6 !important;
+}
+
+/* Editing */
+
+.treasury-grid .ag-cell-inline-editing {
+  background: #FFFFFF !important;
+  border: 1px solid var(--brand-gold) !important;
+  box-shadow: inset 0 0 0 1px rgba(196, 166, 106, 0.2);
+}
+
+.treasury-grid .ag-cell-editor-input {
+  color: var(--foreground) !important;
+  font-family: inherit !important;
+  font-size: 12px !important;
+}
+
+/* Numeric alignment */
+
+.treasury-grid .ag-right-aligned-cell {
+  justify-content: flex-end !important;
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Focus */
+
+.treasury-grid .ag-cell-focus {
+  border: 1px solid var(--brand-gold) !important;
+}
+
+/* Menus */
+
+.treasury-grid .ag-menu {
+  font-family: inherit !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* =========================================================
+   RESPONSIVE SPREADSHEET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .treasury-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 12px;
+  }
+
+  .treasury-toolbar-left,
+  .treasury-toolbar-right {
+    width: 100%;
+  }
+
+  .treasury-search {
+    width: 100%;
+  }
+
+  .treasury-button {
+    padding: 0 11px;
+  }
+
+  .treasury-tabs {
+    overflow-x: auto;
+    padding: 0 10px;
+  }
+
+  .treasury-tab {
+    flex-shrink: 0;
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .treasury-toolbar-left,
+  .treasury-toolbar-right {
+    gap: 6px;
+  }
+
+  .treasury-button {
+    min-height: 34px;
+    font-size: 11px;
+  }
+
+  .treasury-grid {
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

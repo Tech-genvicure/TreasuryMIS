@@ -1,0 +1,61 @@
+
+services:
+  postgres:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    image: ${DOCKERHUB_USERNAME}/genvicure-treasury-backend:${BACKEND_TAG}
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      SECRET_KEY: ${SECRET_KEY}
+      APP_NAME: Genvicure Treasury MIS
+      APP_ENV: production
+      CORS_ORIGINS: https://mis.genvicure.com,https://api.mis.genvicure.com
+    depends_on:
+      postgres:
+        condition: service_healthy
+    expose:
+      - "8000"
+
+  treasury-sync-worker:
+    image: ${DOCKERHUB_USERNAME}/genvicure-treasury-backend:${BACKEND_TAG}
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      SECRET_KEY: ${SECRET_KEY}
+      APP_NAME: Genvicure Treasury MIS
+      APP_ENV: production
+      MS_SYNC_ENABLED: "true"
+      MS_SYNC_INTERVAL_MINUTES: "5"
+    command: ["python", "-m", "app.worker"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    image: ${DOCKERHUB_USERNAME}/genvicure-treasury-frontend:${FRONTEND_TAG}
+    restart: unless-stopped
+    expose:
+      - "3000"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
