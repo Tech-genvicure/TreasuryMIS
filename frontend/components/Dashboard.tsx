@@ -60,10 +60,15 @@ interface DashboardData {
 const formatCr = (value: number) =>
   `${(Number(value || 0) / 10000000).toFixed(2)} Cr`;
 
+
 const formatReportingDate = (value: string) => {
   if (!value) return "--";
+
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "--";
+
+  // Display the previous day's reporting date
+  date.setDate(date.getDate() - 1);
 
   return date.toLocaleDateString("en-GB", {
     day: "2-digit",
@@ -71,6 +76,7 @@ const formatReportingDate = (value: string) => {
     year: "numeric",
   });
 };
+
 
 function getFundIcon(name: string) {
   const normalized = name.toLowerCase();
